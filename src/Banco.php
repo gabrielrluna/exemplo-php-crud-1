@@ -1,5 +1,5 @@
 <?php
-namespace CrudPoo;
+namespace Crud;
 
 /* Indicamos o uso das classes nativas do PHP (ou seja, classes que não fazem parte do nosso namespace*/
 use PDO, Exception;
@@ -25,6 +25,8 @@ public static function conecta():PDO{
              self::$usuario,
              self::$senha);
        self::$conexao->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+       echo "ok";
     } catch (Exception $erro) {
         die ("Deu ruim: ".$erro->getMessage());
     }
