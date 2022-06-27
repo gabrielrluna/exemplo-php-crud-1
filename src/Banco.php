@@ -14,13 +14,13 @@ abstract class Banco {
     
     /* private static \PDO $conexao; // não precisa do use PDO */
     private static PDO $conexao; // precisa do use PDO
-}
 
-public function conecta():PDO{
+
+public static function conecta():PDO{
     try {
-        $conexao = new PDO(
-            "mysql:host=".$servidor."
-             dbname=".$banco."
+        self::$conexao = new PDO(
+            "mysql:host=".self::$servidor.";
+             dbname=".self::$banco.";
              charset=utf8",
              self::$usuario,
              self::$senha);
@@ -28,7 +28,7 @@ public function conecta():PDO{
     } catch (Exception $erro) {
         die ("Deu ruim: ".$erro->getMessage());
     }
-    return self::$conexao
+    return self::$conexao;
 }
 
-Banco::conecta(); //teste
+}
