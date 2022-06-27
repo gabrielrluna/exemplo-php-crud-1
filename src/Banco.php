@@ -1,6 +1,8 @@
 <?php
 namespace CrudPoo;
-use PDO;
+
+/* Indicamos o uso das classes nativas do PHP (ou seja, classes que não fazem parte do nosso namespace*/
+use PDO, Exception;
 
 abstract class Banco {
     /* Propriedades/atributos
@@ -13,3 +15,20 @@ abstract class Banco {
     /* private static \PDO $conexao; // não precisa do use PDO */
     private static PDO $conexao; // precisa do use PDO
 }
+
+public function conecta():PDO{
+    try {
+        $conexao = new PDO(
+            "mysql:host=".$servidor."
+             dbname=".$banco."
+             charset=utf8",
+             self::$usuario,
+             self::$senha);
+       self::$conexao->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (Exception $erro) {
+        die ("Deu ruim: ".$erro->getMessage());
+    }
+    return self::$conexao
+}
+
+Banco::conecta(); //teste
